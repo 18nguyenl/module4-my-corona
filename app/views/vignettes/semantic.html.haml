@@ -23,25 +23,25 @@
           .grouped.fields
             .field
               .ui.checkbox
-                %input.hidden{:tabindex => "0", :type => "checkbox"}/
+                %input{:tabindex => "0", :name => "aches", :type => "checkbox"}/
                 %label Aches and pains
             .field
               .ui.checkbox
-                %input.hidden{:tabindex => "0", :type => "checkbox"}/
+                %input{:tabindex => "0",  :name => "fever", :type => "checkbox"}/
                 %label Fever
             .field
               .ui.checkbox
-                %input.hidden{:tabindex => "0", :type => "checkbox"}/
+                %input{:tabindex => "0",  :name => "cough", :type => "checkbox"}/
                 %label Dry Cough
             .field
               .ui.checkbox
-                %input.hidden{:tabindex => "0", :type => "checkbox"}/
+                %input{:tabindex => "0",  :name => "fatigue", :type => "checkbox"}/
                 %label Fatigue
           %h2.ui.header.dividing Exposure assessment
           .field
             %label Have you had contact with an individual that has tested positive for COVID-19?
             .ui.selection.dropdown
-              %input{:name => "gender", :type => "hidden"}/
+              %input{:name => "isPositive", :type => "hidden"}/
               %i.dropdown.icon
               .default.text Fill out.
               .menu
@@ -51,7 +51,7 @@
           .field
             %label Did you travel outside your state or country in the last 2-14 days?
             .ui.selection.dropdown
-              %input{:name => "gender", :type => "hidden"}/
+              %input{:name => "traveled", :type => "hidden"}/
               %i.dropdown.icon
               .default.text Fill out.
               .menu
@@ -60,7 +60,7 @@
           .field
             %label If so, where?
             .default.text 
-            %input{:type => "text", :placeholder => "State of country of travel"}/
+            %input{:type => "text", :name => "location", :placeholder => "State of country of travel"}/
           %button.ui.primary.button{:type=> "submit"} Submit
 
 / DO NOT MODIFY ANYTHING BELOW THESE LINES
