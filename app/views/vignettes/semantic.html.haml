@@ -2,11 +2,65 @@
 .ui.centered.grid
   .ten.wide.column
     #symptom-checker.panel
+      .ui.three.large.ordered.steps
+        .active.step
+          .content
+            .title Assessment
+            .description We'll review your specific symptoms and exposure risk.
+        .step
+          .content
+            .title Local Comparison
+            .description We'll compare your data against those in your area.
+        .step
+          .content
+            .title Sites & More Info 
+            .description If needed, we will provide you with additional information.
       %h1.ui.header.top.attached.blue Should I get tested?
       .ui.segment.stacked.attached
         / MAIN FORM
         %form#assessment.ui.form
-          %p= BetterLorem.p(10, true)
+          %h2.ui.header.dividing Have you experienced any of the following symptoms?
+          .grouped.fields
+            .field
+              .ui.checkbox
+                %input.hidden{:tabindex => "0", :type => "checkbox"}/
+                %label Aches and pains
+            .field
+              .ui.checkbox
+                %input.hidden{:tabindex => "0", :type => "checkbox"}/
+                %label Fever
+            .field
+              .ui.checkbox
+                %input.hidden{:tabindex => "0", :type => "checkbox"}/
+                %label Dry Cough
+            .field
+              .ui.checkbox
+                %input.hidden{:tabindex => "0", :type => "checkbox"}/
+                %label Fatigue
+          %h2.ui.header.dividing Exposure assessment
+          .field
+            %label Have you had contact with an individual that has tested positive for COVID-19?
+            .ui.selection.dropdown
+              %input{:name => "gender", :type => "hidden"}/
+              %i.dropdown.icon
+              .default.text Fill out.
+              .menu
+                .item{"data-value" => "1"} Yes
+                .item{"data-value" => "0"} No
+          .field
+            %label Did you travel outside your state or country in the last 2-14 days?
+            .ui.selection.dropdown
+              %input{:name => "gender", :type => "hidden"}/
+              %i.dropdown.icon
+              .default.text Fill out.
+              .menu
+                .item{"data-value" => "1"} Yes
+                .item{"data-value" => "0"} No
+          .field
+            %label If so, where?
+            .default.text 
+            %input{:type => "text", :placeholder => "State of country of travel"}/
+          %button.ui.primary.button{:type=> "submit"} Submit
 
 / DO NOT MODIFY ANYTHING BELOW THESE LINES
 :coffeescript
