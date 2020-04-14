@@ -8,7 +8,7 @@
   $ ->
     alertify.set('notifier','position', 'top-left')
     
-    response1 = problem1(SYMPTOMS_STR_1)
+    response1 = problem1(SYMPTOMS_STR_2)
     $('#response').html(response1)
     
     problem2(SYMPTOMS_ARR_1)
@@ -17,19 +17,56 @@
 
   problem1 = (symptoms_string)->
     console.log "PROBLEM1: STRING MANIPULATION"
-    # TODO
-    return "TODO"
     
-  problem2 = (symptoms_arr)->
+    symptoms_string = symptoms_string.slice(10)
+    symptoms_array = symptoms_string.split(",")
+    symptoms_array = _.map symptoms_array, (symptom)=>
+      symptom.trim().toLowerCase()
+    symptoms_array = _.filter symptoms_array, (symptom)=>
+      _.contains COVID_SYMPTOMS, symptom
+    symptoms_string = symptoms_array.join "; "
+   
+    return symptoms_string
+  
+  problem2 = (symptoms_arr)-> 
     console.log "PROBLEM2: PROGRAMMATIC DOM"
-    # TODO
+    _.each symptoms_arr, (symptom)=>
+      domElement = $("<li>").html(symptom)
+
+      if _.contains COVID_SYMPTOMS, symptom
+        domElement.addClass("covid")
+        
+      $("#problem-2 ol.right").append domElement
+    
+    $("#problem-2 ol.left").closest(".column").remove()
     return
     
   problem3 = ()->
-    API_KEY = "TODO" 
-    # TODO
+    API_KEY = "AIzaSyA9Au-QyrdqtzEp8DFXrQl-CVY_W5HvCm8" 
+
+    $.ajax
+      method: "GET"
+      url: "/api/covid_locations"
+      dataType: "json"
+      success: (res)=>
+        _.each res, (location)=>
+          location = location.slice 1, location.lastIndexOf(",")
+          $("#covid-locations").append $("<li>").html(location)
+          $.ajax
+            method: "GET"
+            url: "https://maps.googleapis.com/maps/api/geocode/json"
+            data:
+              latlng: location 
+              key: API_KEY
+            success: (res)=>
+              $("#resolved-locations").append $("<li>").html(res.results[0].formatted_address)
+            error: (res)=>
+              alertify.error "ERROR", res
+      error: (res)=>
+        alertify.error "ERROR", res
+    
+        
     return
-  
   
 / HTML/CSS CODE - DO NOT MODIFY ANYTHING UNDER THIS LINE  
   
